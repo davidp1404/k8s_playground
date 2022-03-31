@@ -1,4 +1,4 @@
-# Application development
+# K8s application modeling
 ## Health checks
 
 Create the environment in your k8s instance and start demo app
