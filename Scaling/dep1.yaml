@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name:  dep1-app
+  namespace: playground
+  labels:
+    app:  dep1-app
+spec:
+  selector:
+    matchLabels:
+      app: dep1-app
+  replicas: 2
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app:  dep1-app
+    spec:
+      containers:
+      - name:  dep1-app
+        image:  ubuntu:20.04
+        resources:
+          requests:
+            cpu: 250m
+            memory: 512Mi
+          limits:
+            cpu: 500m
+            memory: 1Gi
+        command: ["/bin/bash", "-c"]
+        args:
+        - /tmp/script.sh
+        volumeMounts:
+        - name: script
+          mountPath: /tmp/script.sh
+          subPath: script.sh
+      volumes:
+      - name: script
+        configMap:
+          name: dep1-app-script
+          defaultMode: 0744
+      terminationGracePeriodSeconds: 0

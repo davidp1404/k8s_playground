@@ -1,0 +1,57 @@
+apiVersion: autoscaling/v2beta2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: dep1-app
+  labels:
+    app: dep1-app
+spec:
+  maxReplicas: 5
+  minReplicas: 2
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: dep1-app
+  # Remove 10% of pods each 10s
+  behavior:
+  # K8s metrics are updated each 30s in our k8spre instances
+    scaleDown:
+      stabilizationWindowSeconds: 10  # Evaluate conditions each 10s
+      policies:
+      # Reduce pods in 10% after 10s
+      - type: Percent
+        value: 10
+        periodSeconds: 10
+      # But not more than 1 pod after 10s
+      - type: Pods
+        value: 1
+        periodSeconds: 10
+      selectPolicy: Min    
+    scaleUp:
+      stabilizationWindowSeconds: 10  # Evaluate conditions each 10s
+      policies:
+      - type: Pods
+        value: 1
+        periodSeconds: 10
+  metrics:
+  # Scaling on multiple metrics not stable till v1.23 https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/#scaling-on-multiple-metrics
+  - type: Resource
+    resource:
+      name: cpu
+      target:
+        type: Utilization
+        averageUtilization: 80
+  - type: Resource
+    resource:
+      name: memory
+      target:
+        type: Utilization
+        averageUtilization: 80
+  # If you need to monitor resources in a specific container
+  # - type: ContainerResource
+  #   containerResource:
+  #     name: cpu
+  #     container: dep1-app
+  #     target:
+  #       type: Utilization
+  #       averageUtilization: 80
+

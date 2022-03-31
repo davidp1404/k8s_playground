@@ -11,3 +11,4 @@ March live sessions:
 * [HealthChecks](HealthChecks)
 * [PodLifeCycle](PodLifeCycle)
 * [Resources](Resources)
+* [Horizontal Pod Autoscaler](Scaling)

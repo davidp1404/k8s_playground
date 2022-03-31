@@ -27,13 +27,13 @@ spec:
       containers:
       - name:  sample-app
         image:  ubuntu:20.04
-        # resources: 
-        #   requests:
-        #     cpu: 1000m
-        #     memory: 1Gi
-        #   limits:
-        #     cpu: 2000m
-        #     memory: 2Gi
+        resources: 
+          requests:
+            cpu: 1000m
+            memory: 1Gi
+          limits:
+            cpu: 2000m
+            memory: 2Gi
         command: ["/bin/bash", "-c"]
         args: 
         - "DEBIAN_FRONTEND=noninteractive ln -fs /usr/share/zoneinfo/Europe/Madrid /etc/localtime;dpkg-reconfigure --frontend noninteractive tzdata;apt-get update && apt-get install -y iputils-ping iproute2 dnsutils iperf3 stress httping;sleep infinity"

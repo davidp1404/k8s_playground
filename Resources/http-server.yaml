@@ -11,7 +11,7 @@ spec:
       app: my-http-server
   replicas: 3
   strategy:
-    # type: Recreate 
+    #type: Recreate 
     type: RollingUpdate
     rollingUpdate:
       maxSurge: 25%
