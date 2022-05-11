@@ -1,0 +1,7 @@
+mariadb:
+  auth:
+    rootPassword: secretpassword
+service:
+  type: LoadBalancer
+wordpressPassword: password
+wordpressUsername: admin
