@@ -12,3 +12,4 @@ March live sessions:
 * [PodLifeCycle](PodLifeCycle)
 * [Resources](Resources)
 * [Horizontal Pod Autoscaler](Scaling)
+* [Helm notes](helm)
