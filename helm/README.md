@@ -62,11 +62,9 @@ $ helm show values wordpress/
 # Watch values of sub-charts
 $ helm show values wordpress/charts/mariadb-11.0.2.tgz
 
-
-
 ```
 
-2. Lets install it
+2. Let's install it:
 
 ```
 $ helm install --atomic my-wp --version 14.0.6 \
