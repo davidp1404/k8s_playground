@@ -6,7 +6,6 @@
 #Description    :report cluster/namespace scoped resources in a chart                                                                                 
 #Args           :read from stdin rendered k8s resources
 #Author         :David Palau                                              
-#Email          :david.palau@ericsson.com 
 #Example        :
 # Set your context/namespace acordly to your need
 # helm template mykafka-instance bitnami/kafka \
